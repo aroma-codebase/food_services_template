@@ -6,11 +6,11 @@ import Hero from '../components/Hero';
 import MenuSection from '../components/MenuSection';
 import { breakfastItems, lunchItems, dinnerItems, foodImages } from '../data/menuData';
 
-export default function MenuPage() {
+export default function MenuPage({ onBookCatering }) {
   return (
     <div>
       {/* Full-screen hero with carousel */}
-      <Hero />
+      <Hero onBookCatering={onBookCatering} />
 
       {/* Menu sections — directly below hero, no gallery gap */}
       <section id="menu" className="bg-gray-50 dark:bg-gray-900 py-16 sm:py-20">

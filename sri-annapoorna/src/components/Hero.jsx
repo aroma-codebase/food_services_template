@@ -40,7 +40,7 @@ const slides = [
 
 const INTERVAL = 4000;
 
-export default function Hero() {
+export default function Hero({ onBookCatering }) {
   const [current, setCurrent]   = useState(0);
   const [paused, setPaused]     = useState(false);
   const [bookOpen, setBookOpen] = useState(false);
@@ -167,7 +167,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            {/* Primary CTA — opens the book */}
+            {/* Primary CTA — opens the menu book */}
             <motion.button
               onClick={() => setBookOpen(true)}
               whileHover={{ scale: 1.05, boxShadow: '0 20px 50px rgba(249,115,22,0.5)' }}
@@ -182,7 +182,7 @@ export default function Hero() {
 
             {/* Secondary CTA */}
             <motion.button
-              onClick={() => document.getElementById('catering')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={onBookCatering}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
               className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold text-lg rounded-2xl hover:bg-white/20 transition-all duration-200 min-w-[200px]"

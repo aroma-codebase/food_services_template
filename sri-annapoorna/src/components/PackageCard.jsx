@@ -2,7 +2,7 @@
 // PackageCard — Premium animated catering card
 // ============================================
 import { motion } from 'framer-motion';
-import { CheckCircle2, Sparkles, Users } from 'lucide-react';
+import { CheckCircle2, Sparkles } from 'lucide-react';
 
 export default function PackageCard({ pkg, index }) {
   const handleEnquire = () => {
@@ -42,12 +42,6 @@ export default function PackageCard({ pkg, index }) {
       <div className="p-5 sm:p-6 flex flex-col flex-1">
         {/* Price block */}
         <div className="mb-4">
-          <div className="flex items-center gap-2 mb-1">
-            <Users size={13} className={pkg.highlight ? 'text-orange-300' : 'text-gray-400'} />
-            <p className={`text-xs font-medium ${pkg.highlight ? 'text-orange-300' : 'text-gray-400 dark:text-gray-500'}`}>
-              {pkg.subtitle}
-            </p>
-          </div>
           <p
             className={`text-3xl sm:text-4xl font-extrabold leading-none mb-1 ${
               pkg.highlight ? 'text-white' : 'text-gray-900 dark:text-white'
@@ -55,6 +49,9 @@ export default function PackageCard({ pkg, index }) {
             style={{ fontFamily: 'Playfair Display, serif' }}
           >
             {pkg.label}
+          </p>
+          <p className={`text-xs font-medium mb-1 ${pkg.highlight ? 'text-yellow-100' : 'text-gray-400 dark:text-gray-500'}`}>
+            per head
           </p>
           <h3 className={`text-sm font-semibold ${pkg.highlight ? 'text-orange-200' : 'text-orange-600 dark:text-orange-400'}`}>
             {pkg.title}

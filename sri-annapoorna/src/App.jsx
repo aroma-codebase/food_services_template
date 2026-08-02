@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { UtensilsCrossed } from 'lucide-react';
 import Navbar      from './components/Navbar';
 import Footer      from './components/Footer';
+import BookCatering from './components/BookCatering';
 import MenuPage    from './pages/MenuPage';
 import CateringPage from './pages/CateringPage';
 import ContactPage  from './pages/ContactPage';
@@ -126,6 +127,7 @@ function LoadingScreen({ onDone }) {
 export default function App() {
   const [loading,  setLoading]  = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [bookCateringOpen, setBookCateringOpen] = useState(false);
 
   // Persist dark mode in localStorage
   useEffect(() => {
@@ -154,13 +156,22 @@ export default function App() {
           transition={{ duration: 0.4 }}
           className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
         >
-          <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+          <Navbar
+            darkMode={darkMode}
+            setDarkMode={setDarkMode}
+            onBookCatering={() => setBookCateringOpen(true)}
+          />
 
           <main>
-            <MenuPage    />
+            <MenuPage onBookCatering={() => setBookCateringOpen(true)} />
             <CateringPage />
             <ContactPage  />
           </main>
+
+          <BookCatering
+            isOpen={bookCateringOpen}
+            onClose={() => setBookCateringOpen(false)}
+          />
 
           <Footer />
         </motion.div>

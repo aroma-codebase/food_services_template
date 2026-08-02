@@ -12,7 +12,7 @@ const navLinks = [
   { label: 'Contact',  href: '#contact'  },
 ];
 
-export default function Navbar({ darkMode, setDarkMode }) {
+export default function Navbar({ darkMode, setDarkMode, onBookCatering }) {
   const [scrolled,       setScrolled]       = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileOpen,     setMobileOpen]     = useState(false);
@@ -46,6 +46,11 @@ export default function Navbar({ darkMode, setDarkMode }) {
     const id = href.replace('#', '');
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleBookCatering = () => {
+    setMobileOpen(false);
+    onBookCatering?.();
   };
 
   const isActive = (href) => activeSection === href.replace('#', '');
@@ -153,7 +158,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
               {/* Book Catering CTA */}
               <motion.a
                 href="#catering"
-                onClick={(e) => { e.preventDefault(); handleNavClick('#catering'); }}
+                onClick={(e) => { e.preventDefault(); handleBookCatering(); }}
                 whileHover={{ scale: 1.05, boxShadow: '0 8px 20px rgba(249,115,22,0.4)' }}
                 whileTap={{ scale: 0.95 }}
                 className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-sm font-semibold rounded-xl shadow-md shadow-orange-500/25 transition-shadow"
@@ -230,7 +235,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navLinks.length * 0.05 }}
-                  onClick={(e) => { e.preventDefault(); handleNavClick('#catering'); }}
+                  onClick={(e) => { e.preventDefault(); handleBookCatering(); }}
                   className="mt-2 px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-sm font-semibold rounded-xl text-center shadow-md shadow-orange-500/25"
                 >
                   Book Catering

@@ -19,7 +19,7 @@ const seedReviews = [
     id: 2,
     name: 'Rajesh Muthu',
     rating: 5,
-    text: 'We booked their catering for our daughter\'s wedding and they were exceptional. The meals were hot, fresh, and delicious. The team was punctual and professional. Will definitely book again!',
+    text: 'We booked their catering for our daughter\'s wedding and they were exceptional. The meals were hot, fresh, and delicious. Very punctual and professional. Will definitely book again!',
     date: 'February 2026',
     avatar: 'RM',
     title: 'Outstanding catering service',
@@ -32,15 +32,6 @@ const seedReviews = [
     date: 'January 2026',
     avatar: 'SR',
     title: 'Amazing value for money',
-  },
-  {
-    id: 4,
-    name: 'Arjun Venkat',
-    rating: 5,
-    text: 'Pongal and vada combo in the morning is divine. The ghee roast is something else entirely — crispy on the outside, perfectly flavored inside. My go-to breakfast spot every weekend!',
-    date: 'December 2025',
-    avatar: 'AV',
-    title: 'My go-to breakfast place',
   },
 ];
 
@@ -86,129 +77,131 @@ export default function ReviewForm() {
   return (
     <div>
       {/* ── Submission form ─────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="bg-white dark:bg-gray-800 rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100 dark:border-gray-700 mb-12 relative overflow-hidden"
-      >
-        {/* Decorative gradient blob */}
-        <div className="absolute -top-12 -right-12 w-40 h-40 bg-orange-100 dark:bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
+      {
+      // <motion.div
+      //   initial={{ opacity: 0, y: 30 }}
+      //   whileInView={{ opacity: 1, y: 0 }}
+      //   viewport={{ once: true }}
+      //   transition={{ duration: 0.5 }}
+      //   className="bg-white dark:bg-gray-800 rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100 dark:border-gray-700 mb-12 relative overflow-hidden"
+      // >
+      //   {/* Decorative gradient blob */}
+      //   <div className="absolute -top-12 -right-12 w-40 h-40 bg-orange-100 dark:bg-orange-900/20 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-md">
-              <MessageSquare size={18} className="text-white" />
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900 dark:text-white text-lg"
-                style={{ fontFamily: 'Playfair Display, serif' }}>
-                Share Your Experience
-              </h3>
-              <p className="text-xs text-gray-400">Your review helps others discover great food</p>
-            </div>
-          </div>
+      //   <div className="relative z-10">
+      //     <div className="flex items-center gap-3 mb-6">
+      //       <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-md">
+      //         <MessageSquare size={18} className="text-white" />
+      //       </div>
+      //       <div>
+      //         <h3 className="font-bold text-gray-900 dark:text-white text-lg"
+      //           style={{ fontFamily: 'Playfair Display, serif' }}>
+      //           Share Your Experience
+      //         </h3>
+      //         <p className="text-xs text-gray-400">Your review helps others discover great food</p>
+      //       </div>
+      //     </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <input
-                type="text"
-                value={form.name}
-                onChange={e => setForm({ ...form, name: e.target.value })}
-                placeholder="Your Name *"
-                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:border-orange-500 focus:outline-none text-sm transition-colors"
-              />
-              <input
-                type="text"
-                value={form.title}
-                onChange={e => setForm({ ...form, title: e.target.value })}
-                placeholder="Review Title (optional)"
-                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:border-orange-500 focus:outline-none text-sm transition-colors"
-              />
-            </div>
+      //     <form onSubmit={handleSubmit} className="space-y-4">
+      //       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      //         <input
+      //           type="text"
+      //           value={form.name}
+      //           onChange={e => setForm({ ...form, name: e.target.value })}
+      //           placeholder="Your Name *"
+      //           className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:border-orange-500 focus:outline-none text-sm transition-colors"
+      //         />
+      //         <input
+      //           type="text"
+      //           value={form.title}
+      //           onChange={e => setForm({ ...form, title: e.target.value })}
+      //           placeholder="Review Title (optional)"
+      //           className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:border-orange-500 focus:outline-none text-sm transition-colors"
+      //         />
+      //       </div>
 
-            {/* Star Rating */}
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-500 dark:text-gray-400">Your Rating:</span>
-              <div className="flex gap-1">
-                {[1, 2, 3, 4, 5].map(star => (
-                  <motion.button
-                    key={star}
-                    type="button"
-                    whileHover={{ scale: 1.3 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setForm({ ...form, rating: star })}
-                    onMouseEnter={() => setForm({ ...form, hoverRating: star })}
-                    onMouseLeave={() => setForm({ ...form, hoverRating: 0 })}
-                  >
-                    <Star
-                      size={28}
-                      className={`transition-all duration-150 ${
-                        star <= (form.hoverRating || form.rating)
-                          ? 'fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.6)]'
-                          : 'text-gray-300 dark:text-gray-600'
-                      }`}
-                    />
-                  </motion.button>
-                ))}
-              </div>
-              {form.rating > 0 && (
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-sm font-semibold text-amber-500"
-                >
-                  {ratingLabels[form.rating]}
-                </motion.span>
-              )}
-            </div>
+      //       {/* Star Rating */}
+      //       <div className="flex items-center gap-3">
+      //         <span className="text-sm text-gray-500 dark:text-gray-400">Your Rating:</span>
+      //         <div className="flex gap-1">
+      //           {[1, 2, 3, 4, 5].map(star => (
+      //             <motion.button
+      //               key={star}
+      //               type="button"
+      //               whileHover={{ scale: 1.3 }}
+      //               whileTap={{ scale: 0.9 }}
+      //               onClick={() => setForm({ ...form, rating: star })}
+      //               onMouseEnter={() => setForm({ ...form, hoverRating: star })}
+      //               onMouseLeave={() => setForm({ ...form, hoverRating: 0 })}
+      //             >
+      //               <Star
+      //                 size={28}
+      //                 className={`transition-all duration-150 ${
+      //                   star <= (form.hoverRating || form.rating)
+      //                     ? 'fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.6)]'
+      //                     : 'text-gray-300 dark:text-gray-600'
+      //                 }`}
+      //               />
+      //             </motion.button>
+      //           ))}
+      //         </div>
+      //         {form.rating > 0 && (
+      //           <motion.span
+      //             initial={{ opacity: 0, scale: 0.8 }}
+      //             animate={{ opacity: 1, scale: 1 }}
+      //             className="text-sm font-semibold text-amber-500"
+      //           >
+      //             {ratingLabels[form.rating]}
+      //           </motion.span>
+      //         )}
+      //       </div>
 
-            <textarea
-              value={form.text}
-              onChange={e => setForm({ ...form, text: e.target.value })}
-              rows={3}
-              placeholder="Tell us about your experience... *"
-              className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:border-orange-500 focus:outline-none text-sm resize-none transition-colors"
-            />
+      //       <textarea
+      //         value={form.text}
+      //         onChange={e => setForm({ ...form, text: e.target.value })}
+      //         rows={3}
+      //         placeholder="Tell us about your experience... *"
+      //         className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:border-orange-500 focus:outline-none text-sm resize-none transition-colors"
+      //       />
 
-            {error && (
-              <motion.p
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                className="text-xs text-red-500"
-              >{error}</motion.p>
-            )}
+      //       {error && (
+      //         <motion.p
+      //           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+      //           className="text-xs text-red-500"
+      //         >{error}</motion.p>
+      //       )}
 
-            <div className="flex items-center gap-4">
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02, boxShadow: '0 8px 25px rgba(249,115,22,0.4)' }}
-                whileTap={{ scale: 0.97 }}
-                className="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold text-sm rounded-xl shadow-md shadow-orange-500/25 flex items-center gap-2"
-              >
-                <Send size={15} />
-                Post Review
-              </motion.button>
+      //       <div className="flex items-center gap-4">
+      //         <motion.button
+      //           type="submit"
+      //           whileHover={{ scale: 1.02, boxShadow: '0 8px 25px rgba(249,115,22,0.4)' }}
+      //           whileTap={{ scale: 0.97 }}
+      //           className="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold text-sm rounded-xl shadow-md shadow-orange-500/25 flex items-center gap-2"
+      //         >
+      //           <Send size={15} />
+      //           Post Review
+      //         </motion.button>
 
-              <AnimatePresence>
-                {submitted && (
-                  <motion.p
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="text-sm text-green-600 dark:text-green-400 font-medium flex items-center gap-1.5"
-                  >
-                    <span className="text-green-500">✓</span> Review posted!
-                  </motion.p>
-                )}
-              </AnimatePresence>
-            </div>
-          </form>
-        </div>
-      </motion.div>
+      //         <AnimatePresence>
+      //           {submitted && (
+      //             <motion.p
+      //               initial={{ opacity: 0, x: 10 }}
+      //               animate={{ opacity: 1, x: 0 }}
+      //               exit={{ opacity: 0 }}
+      //               className="text-sm text-green-600 dark:text-green-400 font-medium flex items-center gap-1.5"
+      //             >
+      //               <span className="text-green-500">✓</span> Review posted!
+      //             </motion.p>
+      //           )}
+      //         </AnimatePresence>
+      //       </div>
+      //     </form>
+      //   </div>
+      // </motion.div>
+      }
 
       {/* ── Review cards grid ───────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <AnimatePresence>
           {reviews.map((review, idx) => (
             <ReviewCard key={review.id} review={review} index={idx} />
