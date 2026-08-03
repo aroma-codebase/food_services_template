@@ -355,7 +355,7 @@ Source: Sri Annapoorna Booking Flow
                                     >
                                       <div className="min-w-0">
                                         {pkg.tag && (
-                                          <p className="text-[10px] font-semibold tracking-[0.3em] uppercase text-orange-500">
+                                          <p className="text-[10px] font-semibold tracking-[0.3em] uppercase text-orange-300">
                                             {pkg.tag}
                                           </p>
                                         )}
@@ -363,7 +363,7 @@ Source: Sri Annapoorna Booking Flow
                                           {pkg.title}
                                         </h4>
                                         <div className={`mt-3 inline-flex rounded-2xl px-3 py-2 text-right ${isSelected ? 'bg-orange-50 dark:bg-orange-900/20' : 'bg-gray-50 dark:bg-gray-800'}`}>
-                                          <div>
+                                          <div className="flex flex-col items-start">
                                             <p className="text-[10px] font-semibold tracking-[0.24em] uppercase text-gray-400 dark:text-gray-500">
                                               Per head
                                             </p>
@@ -378,13 +378,12 @@ Source: Sri Annapoorna Booking Flow
                                         {pkg.items.slice(0, 3).join(' • ')}
                                       </p>
 
-                                      <div className="mt-4 flex items-center justify-between">
-                                        <p className="text-xs font-medium text-gray-400 dark:text-gray-500">
-                                          {isSelected ? 'Selected package' : 'Tap to select'}
-                                        </p>
-                                        <span className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-semibold ${isSelected ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400'}`}>
-                                          {isSelected ? 'Active' : 'Preview'}
-                                        </span>
+                                      <div className="ml-auto mt-4 flex">
+                                        {isSelected && (
+                                          <span className="inline-flex items-center gap-1 rounded-full bg-orange-500 px-3 py-1 text-[11px] font-semibold text-white">
+                                            Active
+                                          </span>
+                                        )}
                                       </div>
                                     </motion.button>
                                   );
@@ -415,12 +414,18 @@ Source: Sri Annapoorna Booking Flow
                             <div className="flex flex-col gap-4 lg:self-start">
                               <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900">
                                 <div className="mb-4 flex items-center gap-3">
-                                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-orange-500 dark:bg-orange-900/20 dark:text-orange-300">
+                                  <div className="flex h-5 w-5 items-center justify-center rounded-xl 
+                                    {*/ bg-orange-50 */}
+                                    text-orange-500 
+                                    dark:bg-gray-900/20 
+                                    dark:text-gray-500"
+                                  >
                                     <Users size={18} />
                                   </div>
                                   <div>
-                                    <p className="text-sm font-semibold text-gray-900 dark:text-white">Guest count</p>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400">Keep the slider and number field in sync</p>
+                                    <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-gray-400 dark:text-gray-500">
+                                      Guest count
+                                    </p>
                                   </div>
                                 </div>
 
@@ -456,15 +461,15 @@ Source: Sri Annapoorna Booking Flow
                                   Estimated budget
                                 </p>
                                 <div className="mt-3 flex items-end gap-2 text-gray-900 dark:text-white">
-                                  <IndianRupee size={18} className="mb-1 text-orange-500" />
+                                  {/* <IndianRupee size={18} className="mb-1 text-orange-500" /> */}
                                   <div>
                                     <p className="text-2xl font-bold leading-tight">
                                       {formatCurrency(minBudget)}
-                                      <span className="mx-2 text-gray-300 dark:text-gray-700">→</span>
+                                      <span className="mx-3 text-gray-300 dark:text-gray-700">➤</span>
                                       {formatCurrency(maxBudget)}
                                     </p>
-                                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                                      {selectedPackage.title} for {guestCount} guests
+                                    <p className="pt-2 mt-1 text-sm text-gray-500 dark:text-gray-500">
+                                        {selectedPackage.title} for {guestCount} guests
                                     </p>
                                   </div>
                                 </div>
