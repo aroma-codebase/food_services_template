@@ -3,9 +3,11 @@
 // ============================================
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { CheckCircle, ChevronLeft, ChevronRight, IndianRupee, Loader2, Mail, Phone, Send, User, Users, X } from 'lucide-react';
+import { CheckCircle, ChevronLeft, ChevronRight, Download, IndianRupee, Loader2, Mail, Phone, Send, User, Users, X } from 'lucide-react';
 import axios from 'axios';
 import { cateringPackages } from '../data/cateringData';
+import { buildEnquiryPdfHtml } from '../utils/pdf/buildEnquiryPdfHtml';
+import { downloadPdfFromHtml } from '../utils/pdf/downloadPdfFromHtml';
 
 const bookingSteps = ['Choose package', 'Guest count', 'Review & confirm'];
 
@@ -49,6 +51,7 @@ export default function BookCatering({ isOpen, onClose }) {
   const [formErrors, setFormErrors] = useState({});
   const [submitStatus, setSubmitStatus] = useState('idle');
   const [submitError, setSubmitError] = useState('');
+  const [pdfStatus, setPdfStatus] = useState('idle');
   const carouselRef = useRef(null);
   const cardRefs = useRef([]);
 
@@ -169,6 +172,35 @@ Source: Sri Annapoorna Booking Flow
     }
   };
 
+  const handleDownloadEnquiryPdf = async () => {
+    setPdfStatus('generating');
+
+    try {
+      const safePackageName = selectedPackage.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+
+      const html = buildEnquiryPdfHtml({
+        packageTitle: selectedPackage.title,
+        packageLabel: selectedPackage.label,
+        guestCount,
+        budgetRange: formatBudgetRange(minBudget, maxBudget),
+        fullName: bookingForm.fullName,
+        email: bookingForm.email,
+        phone: bookingForm.phone,
+        notes: bookingForm.notes,
+      });
+
+      await downloadPdfFromHtml(html, `sri-annapoorna-enquiry-${safePackageName}-${guestCount}-guests.pdf`);
+
+      setPdfStatus('ready');
+    } catch (error) {
+      console.error('PDF download error:', error);
+      setPdfStatus('error');
+    }
+  };
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -179,6 +211,7 @@ Source: Sri Annapoorna Booking Flow
     setFormErrors({});
     setSubmitStatus('idle');
     setSubmitError('');
+    setPdfStatus('idle');
 
     const frame = requestAnimationFrame(() => scrollToCard(defaultIndex, 'auto'));
     return () => cancelAnimationFrame(frame);
@@ -724,6 +757,16 @@ Source: Sri Annapoorna Booking Flow
 
               {bookingStep === 3 && (
                 <div className="flex flex-col gap-3 border-t border-gray-100 px-5 py-4 dark:border-gray-800 sm:flex-row sm:items-center sm:justify-end sm:px-6">
+                  <button
+                    type="button"
+                    onClick={handleDownloadEnquiryPdf}
+                    disabled={pdfStatus === 'generating'}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-orange-200 bg-white px-6 py-3 text-sm font-semibold text-orange-600 shadow-sm transition-colors hover:bg-orange-50 disabled:cursor-not-allowed disabled:opacity-70 dark:border-orange-900/50 dark:bg-gray-900 dark:text-orange-300 dark:hover:bg-gray-800"
+                  >
+                    {pdfStatus === 'generating' ? 'Creating PDF...' : 'Download enquiry PDF'}
+                    <Download size={16} />
+                  </button>
+
                   <button
                     type="button"
                     onClick={onClose}

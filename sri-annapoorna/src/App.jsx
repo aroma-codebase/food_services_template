@@ -10,6 +10,7 @@ import BookCatering from './components/BookCatering';
 import MenuPage    from './pages/MenuPage';
 import CateringPage from './pages/CateringPage';
 import ContactPage  from './pages/ContactPage';
+import PdfDownloadTestPage from './pages/PdfDownloadTestPage';
 
 /* ── Premium Loading Screen ── */
 function LoadingScreen({ onDone }) {
@@ -128,6 +129,7 @@ export default function App() {
   const [loading,  setLoading]  = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [bookCateringOpen, setBookCateringOpen] = useState(false);
+  const pdfTestMode = new URLSearchParams(window.location.search).has('pdf-test');
 
   // Persist dark mode in localStorage
   useEffect(() => {
@@ -146,7 +148,9 @@ export default function App() {
 
   return (
     <AnimatePresence mode="wait">
-      {loading ? (
+      {pdfTestMode ? (
+        <PdfDownloadTestPage />
+      ) : loading ? (
         <LoadingScreen key="loading" onDone={() => setLoading(false)} />
       ) : (
         <motion.div
